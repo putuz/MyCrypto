@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct Time: Codable {
+    let serverTime: Int
+}

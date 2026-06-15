@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct MarketHeaderView: View {
+    let count: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Markets")
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Spacer()
+            
+            Text("\(count)")
+                .foregroundStyle(.secondary)
+        }
     }
 }
 
 #Preview {
-    MarketHeaderView()
+    MarketHeaderView(count: 2543)
 }

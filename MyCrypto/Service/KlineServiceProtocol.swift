@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol KlineServiceProtocol {
+    func connect(symbol: String, interval: String)
+    
+    func disconnect()
+}

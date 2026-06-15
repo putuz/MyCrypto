@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol BinanceSocketProtocol {
+    func connect(symbol: String)
+    
+    func disconnect()
+}
