@@ -45,7 +45,7 @@ struct ContentView: View {
                 tickerSocketVm: tickerSocketVm,
                 klineSocketVM: klineSocketVM,
                 selectedSymbol: $selectedSymbol,
-                selectedInterval: $selectedInterval,
+                selectedInterval: $selectedInterval, searchText: $ticker24Vm.searchText,
                 symbols: symbols,
                 intervals: intervals,
                 onIntervalChange: { interval in

@@ -16,6 +16,7 @@ struct HomeView: View {
     
     @Binding var selectedSymbol: String
     @Binding var selectedInterval: String
+    @Binding var searchText: String
     
     let symbols: [String]
     let intervals: [String]
@@ -61,7 +62,7 @@ struct HomeView: View {
                     .padding(.bottom, 24)
                     
                     MarketSection(
-                        tickers: ticker24Vm.ticker24
+                        searchText: $searchText, tickers: ticker24Vm.filteredTickers
                     )
                     .padding(.horizontal, 16)
                     .padding(.bottom, 32)

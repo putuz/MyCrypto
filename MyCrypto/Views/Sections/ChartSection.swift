@@ -17,18 +17,12 @@ struct ChartSection: View {
 
         VStack(alignment: .leading, spacing: 12) {
 
-            SectionHeader(
-                title: "Price Chart",
-                subtitle: "\(symbol) · \(interval.uppercased())"
-            )
+            SectionHeader(title: "Price Chart")
 
             CandleSectionView(
                 symbol: symbol,
                 interval: interval,
                 candles: candles
-            )
-            .clipShape(
-                RoundedRectangle(cornerRadius: 16)
             )
         }
     }

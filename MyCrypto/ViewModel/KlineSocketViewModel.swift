@@ -23,4 +23,8 @@ final class KlineSocketViewModel: ObservableObject {
     func connect(symbol: String, interval: String) {
         socket.connect(symbol: symbol, interval: interval)
     }
+    
+    func disconnect() {
+        socket.disconnect()
+    }
 }

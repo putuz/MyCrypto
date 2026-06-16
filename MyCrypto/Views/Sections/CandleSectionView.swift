@@ -13,10 +13,27 @@ struct CandleSectionView: View {
     let symbol: String
     let interval: String
     let candles: [Candle]
-    @State private var scrollPosition = 0
+    @State private var scrollPosition: Int = 0
     
     private var lastClose: Double {
         candles.last?.close ?? 0
+    }
+    
+    private var visibleCandles: [Candle] {
+        let start = max(0, scrollPosition)
+        let end = min(candles.count, start + 50)
+        guard start < end else { return [] }
+        return Array(candles[start..<end])
+    }
+    
+    private var minPrice: Double {
+        guard let min = visibleCandles.map(\.low).min() else { return 0 }
+        return min * 0.999
+    }
+    
+    private var maxPrice: Double {
+        guard let max = visibleCandles.map(\.high).max() else { return 0 }
+        return max * 1.001
     }
     
     var body: some View {
@@ -32,7 +49,7 @@ struct CandleSectionView: View {
                     .font(.caption)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .background(.orange.opacity(0.15))
+                    .foregroundStyle(Color.accentGreen)
                     .clipShape(Capsule())
             }
             
@@ -42,19 +59,22 @@ struct CandleSectionView: View {
                     Array(candles.enumerated()),
                     id: \.element.id
                 ) { index, candle in
-
+                    
+                    // Wick
                     RuleMark(
                         x: .value("Index", index),
                         yStart: .value("Low", candle.low),
                         yEnd: .value("High", candle.high)
                     )
                     .foregroundStyle(candle.isBullish ? .green : .red)
-
+                    .lineStyle(StrokeStyle(lineWidth: 1.5))
+                    
+                    // Body
                     RectangleMark(
                         x: .value("Index", index),
                         yStart: .value("OpenCloseMin", min(candle.open, candle.close)),
                         yEnd: .value("OpenCloseMax", max(candle.open, candle.close)),
-                        width: 5
+                        width: .fixed(7)
                     )
                     .foregroundStyle(candle.isBullish ? .green : .red)
                 }
@@ -67,7 +87,7 @@ struct CandleSectionView: View {
                         position: .overlay,
                         alignment: .trailing
                     ) {
-                        Text(lastClose.formatted(.number.precision(.fractionLength(2))))
+                        Text(lastClose.formatted(.number.precision(.fractionLength(8))))
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
@@ -97,16 +117,6 @@ struct CandleSectionView: View {
         .onChange(of: candles.count) { _, _ in
             scrollPosition = max(candles.count - 50, 0)
         }
-    }
-    
-    private var minPrice: Double {
-        guard let min = candles.map(\.low).min() else { return 0 }
-        return min * 0.998
-    }
-    
-    private var maxPrice: Double {
-        guard let max = candles.map(\.high).max() else { return 0 }
-        return max * 1.002
     }
 }
 
