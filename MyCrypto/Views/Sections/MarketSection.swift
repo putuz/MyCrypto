@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct MarketSection: View {
+
+    let tickers: [Ticker24]
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 12) {
+
+            SectionHeader(
+                title: "Markets",
+                subtitle: "\(tickers.count) pairs"
+            )
+
+            MarketHeaderView(count: 5)
+
+            LazyVStack(spacing: 1) {
+                ForEach(tickers.prefix(50), id: \.symbol) { ticker in
+                    MarketRowView(ticker: ticker)
+                        .background(Color.cardBackground)
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.cardBorder, lineWidth: 1)
+            )
+        }
     }
 }
 
-#Preview {
-    MarketSection()
-}

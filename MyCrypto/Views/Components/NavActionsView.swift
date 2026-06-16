@@ -1,4 +1,11 @@
-// MARK: - Nav Actions
+//
+//  NavActionsView.swift
+//  MyCrypto
+//
+//  Created by Amelia Putri Oktaviani on 15/06/2026.
+//
+
+import SwiftUI
  
 struct NavActionsView: View {
     let serverTime: String
@@ -21,4 +28,8 @@ struct NavActionsView: View {
             }
         }
     }
+}
+
+#Preview {
+    NavActionsView(serverTime: "")
 }

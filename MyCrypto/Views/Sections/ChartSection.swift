@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct ChartSection: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
 
-#Preview {
-    ChartSection()
+    let symbol: String
+    let interval: String
+    let candles: [Candle]
+
+    var body: some View {
+
+        VStack(alignment: .leading, spacing: 12) {
+
+            SectionHeader(
+                title: "Price Chart",
+                subtitle: "\(symbol) · \(interval.uppercased())"
+            )
+
+            CandleSectionView(
+                symbol: symbol,
+                interval: interval,
+                candles: candles
+            )
+            .clipShape(
+                RoundedRectangle(cornerRadius: 16)
+            )
+        }
+    }
 }

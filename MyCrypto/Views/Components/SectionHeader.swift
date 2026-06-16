@@ -7,12 +7,25 @@
 
 import SwiftUI
 
+// MARK: - Section Header
+
 struct SectionHeader: View {
+    let title: String
+    let subtitle: String
+ 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(title)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundStyle(Color.textPrimary)
+            Text(subtitle)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(Color.textSecondary)
+            Spacer()
+        }
     }
 }
 
 #Preview {
-    SectionHeader()
+    SectionHeader(title: "exmample", subtitle: "example")
 }

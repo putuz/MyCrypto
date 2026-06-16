@@ -7,9 +7,23 @@
 
 import SwiftUI
 
+// MARK: - Nav Logo
+
 struct NavLogoView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 6) {
+            ZStack {
+                Circle()
+                    .fill(Color.accentBlue)
+                    .frame(width: 26, height: 26)
+                Image(systemName: "chart.line.uptrend.xyaxis")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(.white)
+            }
+            Text("MyCrypto")
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(Color.textPrimary)
+        }
     }
 }
 
